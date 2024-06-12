@@ -1,0 +1,42 @@
+name: Update README Badge
+
+on:
+  workflow_run:
+    workflows: ["CI"]
+    types:
+      - completed
+
+jobs:
+  update-readme:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+
+    - name: Update Badge
+      run: |
+        STATUS="failed"
+        BADGE_COLOR="red"
+        if [ "${{ github.event.workflow_run.conclusion }}" == "success" ]; then
+          STATUS="passing"
+          BADGE_COLOR="green"
+        fi
+        sed -i "s|<!-- Badge Placeholder: CI status badge goes here -->|![CI status](https://img.shields.io/badge/CI-$STATUS-$BADGE_COLOR)|" README.md
+
+    - name: Check for Changes
+      id: git-check
+      run: |
+        if git diff --exit-code; then
+          echo "::set-output name=changed::false"
+        else
+          echo "::set-output name=changed::true"
+        fi
+
+    - name: Commit and Push
+      if: steps.git-check.outputs.changed == 'true'
+      run: |
+        git config --global user.name 'David Graf'
+        git config --global user.email 'grafdavid@me.com'
+        git commit -am "Update CI status badge"
+        git push
+

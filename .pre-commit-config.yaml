@@ -1,0 +1,18 @@
+repos:
+  - repo: local
+    hooks:
+      - id: imports
+        name: imports
+        entry: rye lint
+        language: system
+        types: [python]
+
+      # - id: pytest
+      #   name: run tests
+      #   entry: rye run python -m pytest -m "not slow"
+      #   language: system
+      #   types: [python]
+      #   stages:
+      #       - "pre-push"
+      #   always_run: true
+      #   pass_filenames: false
