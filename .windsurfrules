@@ -1,6 +1,24 @@
 # Coding Rules and Guidelines
 
+## Core Principles
+
+1. **Clarity Over Brevity**:
+   * Favor understandable code over clever tricks or unnecessarily concise code.
+   * Prioritize legibility and maintainability over saving a few lines.
+
+2. **Incremental Development**:
+   * Make small, verifiable changes rather than large, sweeping modifications.
+   * Test each change before moving on to the next.
+   * Communicate clearly about each step in the development process.
+
+3. **Collaboration First**:
+   * Seek confirmation before implementing significant changes.
+   * Present multiple options when a decision point is reached.
+   * Ask clarifying questions when requirements are ambiguous.
+   * Explain rationale for implementation choices.
+
 ## Repository Structure and Organization
+
 1. All application code must be placed in the `src` directory.
 2. All data files must be stored in the `data` directory.
 3. All tests must be written in the `tests` directory, maintaining a mirror structure to the `src` directory.
@@ -8,6 +26,7 @@
 5. Maintain a clean project structure; avoid creating files outside of designated directories.
 
 ## Development Workflow
+
 1. Always work on feature branches; never commit directly to the main branch.
 2. The main branch is protected and requires PRs to be merged through the merge queue.
 3. Before creating a new branch, verify your current branch and ensure it makes sense for the task at hand.
@@ -16,30 +35,92 @@
 6. Update GitHub PRs and issues regularly as progress is made.
 7. Always read all comments on PRs and issues as they may contain crucial information.
 
-## Code Quality and Standards
-1. Follow the DRY (Don't Repeat Yourself) principle in all code and documentation.
-2. Use ruff for code linting and formatting; do not manually fix linting issues.
-3. All Python code should adhere to PEP 8 standards as enforced by ruff.
-4. Write clean, readable code with descriptive variable and function names.
-5. Include docstrings for all functions, classes, and modules.
-6. Avoid unnecessary complexity; prefer simple, straightforward solutions.
-7. Follow Single Responsibility Principle (SRP) for functions and classes.
+## Code Style and Readability
+
+1. **Consistent Naming Conventions**:
+   * Use descriptive, self-explanatory names for variables, functions, classes, and modules.
+   * Follow Python's `snake_case` convention for all Python code.
+
+2. **Consistent Formatting**:
+   * Use ruff for code linting and formatting; do not manually fix linting issues.
+   * All Python code should adhere to PEP 8 standards as enforced by ruff.
+   * Maintain consistent indentation, spacing, and line width.
+
+3. **Comments That Add Value**:
+   * Write comments to explain the "why" behind complex logic, not just the "what."
+   * Include docstrings for all functions, classes, and modules.
+   * Remove or avoid redundant comments that restate the obvious.
+
+4. **Small, Single-Responsibility Functions**:
+   * Keep functions concise and focused on doing one thing well.
+   * Follow Single Responsibility Principle (SRP) for both functions and classes.
+   * Break larger functionalities into smaller, reusable units that are easier to test and maintain.
+
+## Architecture and Modularity
+
+1. **Encapsulation of Complexity**:
+   * Hide complex logic behind clear interfaces or modules.
+   * Present a simple, well-documented API to callers while keeping internals flexible.
+
+2. **Decouple Components**:
+   * Design modules with minimal direct knowledge of each other's implementations.
+   * Use interfaces, dependency injection, or other patterns to reduce coupling.
+   * Improve testability and flexibility by minimizing dependencies.
+
+3. **DRY (Don't Repeat Yourself)**:
+   * Factor out repetitive patterns into shared functions or classes.
+   * Refactor early and often to prevent code drift and bloat over time.
+   * Apply DRY to both code and documentation.
 
 ## Testing Requirements
-1. Adopt a test-driven development approach whenever possible.
-2. Use pytest for all testing needs.
-3. Write tests for all new functionality and significant code changes.
-4. Ensure tests cover both expected outcomes and edge cases.
-5. Maintain a reasonable test coverage level (aim for >80%).
-6. All tests must pass before submitting a PR.
+
+1. **Testability as a Priority**:
+   * Adopt a test-driven development approach whenever possible.
+   * Write code that is easy to test in isolation.
+   * Separate pure logic from side effects and ensure complex logic resides in testable units.
+
+2. **Comprehensive Test Coverage**:
+   * Use pytest for all testing needs.
+   * Write tests for all new functionality and significant code changes.
+   * Ensure tests cover both expected outcomes and edge cases.
+   * Maintain a reasonable test coverage level (aim for >80%).
+   * All tests must pass before submitting a PR.
+
+## Error Handling and Input Validation
+
+1. **Fail Fast, Fail Loud**:
+   * Validate assumptions early, return or throw errors as soon as something unexpected happens.
+   * Provide clear error messages that help identify the root cause quickly.
+
+2. **Thorough Input Validation**:
+   * Check all inputs for correctness, sanity, and security risks before processing.
+   * Guard against malformed data, null references, or out-of-bound values.
+   * Log errors appropriately with context for debugging.
+   * Consider failure scenarios for network requests, file I/O, and other external operations.
+
+## Performance and Resource Management
+
+1. **Appropriate Data Structures and Algorithms**:
+   * Choose data structures and algorithms best suited for the problem.
+   * Opt for clarity first, and only optimize further if performance profiling indicates a need.
+
+2. **Avoid Premature Optimization**:
+   * Start with a clean, readable solution.
+   * Measure performance with profiling tools and address hotspots instead of guessing.
+
+3. **Resource Lifecycle Awareness**:
+   * Properly manage memory, file handles, network connections, and other resources.
+   * Use appropriate context managers (`with` statements) to ensure proper cleanup.
 
 ## Dependency Management
+
 1. Use uv from astral for Python package management.
 2. Document all dependencies in the appropriate requirements files.
 3. Minimize external dependencies; justify any new packages.
 4. Pin dependency versions to ensure reproducible builds.
 
 ## Git and GitHub Practices
+
 1. Use the GitHub CLI (gh) for GitHub operations; we are already authenticated.
 2. Format commit messages as: `"type: description"` where type must be one of [add, update, remove, fix, meta, release].
 3. Always double-check changes before committing, pushing, or creating PRs.
@@ -47,34 +128,32 @@
 5. Keep PRs focused on a single concern for easier review.
 6. Request reviews from appropriate team members.
 
-## Error Handling and Edge Cases
-1. Implement robust error handling for all code that could fail.
-2. Validate inputs and handle edge cases gracefully.
-3. Log errors appropriately with context for debugging.
-4. Consider failure scenarios for network requests, file I/O, and other external operations.
-
 ## Documentation
+
 1. Keep documentation up-to-date with code changes.
 2. Only update documentation after the associated code changes have been saved.
 3. Document API endpoints, function parameters, and return values.
 4. Include examples for complex or non-obvious functionality.
 
 ## Review Process
+
 1. All code must be reviewed before merging.
 2. Reviewers should check for adherence to these rules.
 3. Address all review comments before requesting re-review.
 4. Verify that all automated checks pass.
 
 ## Collaboration Etiquette
+
 1. Be respectful of others in comments, code, and documentation.
 2. Make content clear and understandable to others.
 3. Acknowledge and credit others' contributions appropriately.
 4. Maintain professional communication in all interactions.
 
 ## Verification Before Submission
+
 1. Run all tests locally before submitting.
 2. Verify that ruff shows no linting issues.
 3. Run through a personal checklist of these rules before creating a PR.
 4. Ensure all automated CI checks pass before requesting reviews.
 
-Remember: We implement automation to make contributing smooth and easy, not to add complexity. The goal is maintainable, high-quality code through consistent processes.
+Remember: We implement automation to make contributing smooth and easy, not to add complexity. The goal is maintainable, high-quality code through consistent processes developed through incremental, collaborative steps.
