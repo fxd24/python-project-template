@@ -1,2 +1,2 @@
-def hello() -> str:
-    return "Hello from python-project-template!"
+def main() -> None:
+    print("Hello from python-project-template!")

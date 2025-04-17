@@ -1,15 +1,12 @@
-test: 
-	rye run python -m pytest -v
+test:
+	uv run pytest -v
 
 lint:
-	rye lint
-	# rye run ruff check --select I --select ERA --select F .
+	uv run ruff check .
 
-fix: 
-	rye lint --fix
-	# rye run ruff check --select I --select F401 --fix .
-	# rye run ruff format .
+fix:
+	uv run ruff check . --fix
 
 sync:
-	rye lock
-	rye run pre-commit install
+	uv sync
+	uv run pre-commit install

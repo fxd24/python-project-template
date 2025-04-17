@@ -1,33 +1,53 @@
 # python-project-template
 
-Problem:
-Every time you start a new project in python there are a set of default functionalities 
-that are helpful to have and that require time to set up.
+A modern Python project template to jumpstart development with best practices, tools, and automation.
 
-Solution:
-In order to speed up the development and get to create actual value. This repository 
-contains a set of configurations for:
-- Python environment management (Rye and Poetry)
-- CICD: Code is set up already to update dependencies with Dependabot.
-- Makefile with various helpful targets:
-    - to test the code
-    - to init
+## Features
+- Python environment management with uv and pyenv
+- Pre-configured CI/CD (Dependabot, pre-commit)
+- Out-of-the-box Makefile for testing, linting, and syncing
+- Example code and tests
 
+## Requirements
+- Python >=3.11
+- [uv](https://github.com/astral-sh/uv)
 
-## Requirements 
+## Getting Started
 
-Rye:  /rye-up.com
-# Steps
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/yourusername/python-project-template.git
+   cd python-project-template
+   ```
+2. Initialize the environment:
+   ```bash
+   rye sync
+   ```
+3. Run the main function:
+   ```bash
+   rye run python -m python_project_template
+   ```
 
-From the repositories source folder:
+## Usage
+
+This template includes a sample main function. To run it:
+
 ```python
-rye init
-rye sync
+from python_project_template import main
+main()  # prints "Hello from python-project-template!"
 ```
 
-Add dependencies:
+## Running Tests
 
+```bash
+make test
+```
 
+## Linting
+
+```bash
+make lint
 ```
-rye add
-```
+
+## Contributing
+Feel free to fork, open issues, and submit PRs to improve this template!
