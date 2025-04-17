@@ -19,13 +19,13 @@ A modern Python project template to jumpstart development with best practices, t
    git clone https://github.com/yourusername/python-project-template.git
    cd python-project-template
    ```
-2. Initialize the environment:
+2. Initialize the environment and install dependencies:
    ```bash
-   rye sync
+   make sync
    ```
 3. Run the main function:
    ```bash
-   rye run python -m python_project_template
+   python -m python_project_template
    ```
 
 ## Usage
